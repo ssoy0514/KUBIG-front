@@ -1,0 +1,92 @@
+html {
+  width: 100%;
+  height: 100%;
+  font-size: 87.5%;
+}
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont,
+    "Apple SD Gothic Neo", Pretendard, Roboto, "Noto Sans KR", "Segoe UI",
+    "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-width: 1080px;
+}
+header {
+  min-width: 1080px;
+}
+* {
+  box-sizing: border-box;
+  color: #000;
+  font-style: normal;
+  line-height: 180%;
+  margin: 0;
+  outline: none;
+}
+
+div#root {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100%;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+ul {
+  list-style: none;
+}
+a {
+  font-family: Pretendard;
+  text-decoration: none;
+  color: #1e1e1e;
+}
+button {
+  background: inherit;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  overflow: visible;
+  cursor: pointer;
+}
+
+h1 {
+  /*font-size: 28px;*/
+  font-weight: 700;
+}
+h2 {
+  /*font-size: 21px;*/
+  font-weight: 700;
+}
+h3 {
+  /*font-size: 18px;*/
+  font-weight: 400;
+}
+h4 {
+  /*font-size: 16px;*/
+  font-weight: 400;
+}
+p {
+  /*font-size: 16px;*/
+  font-style: normal;
+  font-weight: 400;
+}
+strong {
+  font-weight: 700;
+}
+
+.fluid-wrapper {
+  width: 100%;
+  max-width: 800px; /* 더 넓은 경우는 필요에 따라 조절 가능 */
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+}
