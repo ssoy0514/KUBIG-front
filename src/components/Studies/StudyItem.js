@@ -4,6 +4,7 @@ import { ItemWrapper as StudyItemWrapper } from "../common/StudyAndProject";
 import { useContext, useState, useEffect } from "react";
 import AuthContext from "../Auth/AuthContext";
 import client from "../../lib/httpClient";
+import PdfViewer from "./PdfViewer";
 
 import ReactNotion from "./ReactNotion";
 
@@ -85,8 +86,20 @@ export default function StudyItem({ study }) {
             </StudyInfo>
           </HeaderWrapper>
 
-          <DocWrapper>
-            {study.content ? (
+          {study.content ? (
+            <PdfViewer fileUrl={study.content} />
+          ) : (
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: '100%',
+              height: '30em',
+            }}>아직 작성된 내용이 없습니다.</div>
+          )}
+
+          {/* <DocWrapper> */}
+            {/* {study.content ? (
               <ReactNotion pageId={study.content} />
             ) : (
               <div style={{
@@ -96,10 +109,10 @@ export default function StudyItem({ study }) {
                 width: '100%',
                 height: '30em',
               }}>아직 작성된 내용이 없습니다.</div>
-            )}
+            )} */}
             {/* {study.content && <div style={{ width: "85%", padding: "2rem" }} dangerouslySetInnerHTML={{ __html: study.content }} />} */}
             {/* {study.fileUrl != "default_url" && <PdfViewer fileUrl={study.fileUrl} />} */}
-          </DocWrapper>
+          {/* </DocWrapper> */}
         </StudyItemWrapper>
       </div>
     )

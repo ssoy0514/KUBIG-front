@@ -1,14 +1,16 @@
 import { styled } from "styled-components";
 import { useEffect, useState } from "react";
 import QuillEditor from "./QuillEditor";
+import PdfInput from "../../components/Studies/PdfInput";
 import TitleAndCategory from "../common/TitleAndCategory";
 import { useSearchParams } from "react-router-dom";
 import client from "../../lib/httpClient";
 
 export default function StudyEdit() {
   const [htmlStr, setHtmlStr] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [thumbnailImg, setThumbnailImg] = useState(null);
   const [title, setTitle] = useState("");
-  const [thumbnailImg, setThumbnailImg] = useState("");
 
   const [semesters, setSemesters] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -58,7 +60,7 @@ export default function StudyEdit() {
     <NewWrapper>
       <TitleAndCategory
         htmlStr={htmlStr}
-        pdfFile={null}
+        pdfFile={selectedFile}
         title={title}
         setTitle={setTitle}
         semesters={semesters}
@@ -70,28 +72,34 @@ export default function StudyEdit() {
         categories={categories}
         session={session}
       />
+      <PdfInput
+        setSelectedFile={setSelectedFile}
+        selectedFile={selectedFile}
+        thumbnailImg={thumbnailImg}
+        setThumbnailImg={setThumbnailImg}
+      />
 
-      <NotionInput
+      {/* <NotionInput
         type="text"
         placeholder={"노션의 페이지 ID를 입력해주세요"}
         value={htmlStr}
         onChange={pageIdChange}
-      />
+      /> */}
       {/* <EditorWrapper>
         <QuillEditor htmlStr={htmlStr} setHtmlStr={setHtmlStr}></QuillEditor>
       </EditorWrapper> */}
-  <PdfInputWrapper style={{ height: "12rem" }}>
-    {thumbnailImg ? thumbnailImg.name : "파일을 선택해주세요."}
-    <Label for="thumbnail">
-      썸네일 이미지 업로드
-      <InputFile
-        id="thumbnail"
-        type="file"
-        onChange={handleThumbnailChange}
-        accept="image/*"
-      />
-    </Label>
-  </PdfInputWrapper>
+      {/* <PdfInputWrapper style={{ height: "12rem" }}>
+        {thumbnailImg ? thumbnailImg.name : "파일을 선택해주세요."}
+        <Label for="thumbnail">
+          썸네일 이미지 업로드
+          <InputFile
+            id="thumbnail"
+            type="file"
+            onChange={handleThumbnailChange}
+            accept="image/*"
+          />
+        </Label>
+      </PdfInputWrapper> */}
     </NewWrapper >
   );
 }

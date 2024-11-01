@@ -12,8 +12,7 @@ function ProjectEdit() {
 
   const trim = window.location.href.substring(0, url.lastIndexOf("/"));
   const id = trim.substring(trim.lastIndexOf("/") + 1);
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [thumbnailImg, setThumbnailImg] = useState(null);
+
   const [title, setTitle] = useState("");
   const [semesters, setSemesters] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -24,6 +23,9 @@ function ProjectEdit() {
   const [existingFile, setExistingFile] = useState(null);
 
   const [session, setSession] = useState(null);
+  
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [thumbnailImg, setThumbnailImg] = useState(null);
 
   const fetch = async () => {
     try {
@@ -71,7 +73,9 @@ function ProjectEdit() {
   useEffect(() => {
     fetchCategory(selectedSemester);
   }, [selectedSemester]);
+
   const updatePost = async () => {
+    
     try {
       let thumbnailUrl = existingThumbnail;
       let fileUrl = existingFile;
@@ -83,9 +87,9 @@ function ProjectEdit() {
           process.env.REACT_APP_KUBIG_PUBLIC_API_URL + "/s3",
           thumbnailFormData
         );
-
         thumbnailUrl = thumbnailResponse.data;
       }
+
       if (selectedFile) {
         const pdfFormData = new FormData();
         pdfFormData.append("file", selectedFile);

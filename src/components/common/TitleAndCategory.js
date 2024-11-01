@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import client from "../../lib/httpClient";
 
 export default function TitleAndCategory({
-  htmlStr,
+  pdfFile,
   title,
   thumbnailImg,
   setTitle,
@@ -26,20 +26,28 @@ export default function TitleAndCategory({
   };
   const uploadPostHandler = async () => {
     try {
+      const pdfFormData = new FormData();
+      pdfFormData.append("file", pdfFile);
+      
+      const pdfResponse = await client.post(
+        process.env.REACT_APP_KUBIG_PUBLIC_API_URL + "/s3",
+        pdfFormData
+      );
+      const pdfUrl = pdfResponse.data;
+
       const thumbnailFormData = new FormData();
       thumbnailFormData.append("file", thumbnailImg);
-      console.log(thumbnailImg);
+      
       const thumbnailResponse = await client.post(
         process.env.REACT_APP_KUBIG_PUBLIC_API_URL + "/s3",
         thumbnailFormData
       );
-
       const thumbnailUrl = thumbnailResponse.data;
 
       const res = await client.post("/studies", {
         title: title,
         categoryId: selectedCategory,
-        content: htmlStr,
+        content: pdfUrl,
         thumbnailUrl: thumbnailUrl,
       });
       window.location.href = "/studies?difficulty=" + session;
@@ -84,8 +92,8 @@ export default function TitleAndCategory({
             title === "" ||
             selectedSemester === null ||
             selectedCategory === null ||
-            thumbnailImg === null ||
-            htmlStr === ""
+            pdfFile === null ||
+            thumbnailImg === null
           }
           onClick={update ? update : uploadPostHandler}
         >

@@ -46,7 +46,6 @@ function ProjectNew() {
   useEffect(() => {
     fetchCategory(selectedSemester);
   }, [selectedSemester]);
-
   return (
     <NewWrapper>
       <TitleAndCategory
@@ -97,8 +96,8 @@ const TitleAndCategory = ({
   const uploadPostHandler = async () => {
     try {
       const pdfFormData = new FormData();
-
       pdfFormData.append("file", pdfFile);
+      
       const pdfResponse = await client.post(
         process.env.REACT_APP_KUBIG_PUBLIC_API_URL + "/s3",
         pdfFormData
@@ -107,6 +106,7 @@ const TitleAndCategory = ({
 
       const thumbnailFormData = new FormData();
       thumbnailFormData.append("file", thumbnailImg);
+
       const thumbnailResponse = await client.post(
         process.env.REACT_APP_KUBIG_PUBLIC_API_URL + "/s3",
         thumbnailFormData
